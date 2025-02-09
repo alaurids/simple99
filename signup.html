@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading Admin - Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-link, .password-requirements {
+            margin-top: 10px;
+            font-size: 0.75em;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <input type="text" id="fname" placeholder="First name" required>
+            <input type="text" id="lname" placeholder="Last name" required>
+            <input type="text" id="email" placeholder="Email address" required>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <label for="role">Select Role:</label>
+            <select id="role" required>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="trader">Trader</option>
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="password-requirements">
+            <p>Password requirements:</p>
+            <p id="lowercase">- At least one lowercase character</p>
+            <p id="uppercase">- At least one uppercase character</p>
+            <p id="number">- At least one number</p>
+            <p id="special">- At least one special character</p>
+            <p id="eight">- 8 characters or more in length</p>
+        </div>
+        <p>Already have an account? <a href="index.html">Login</a></p>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let valid = true;
+
+            const fname = document.getElementById("fname").value;
+            const lname = document.getElementById("lname").value;
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const role = document.getElementById("role").value;
+
+            if (localStorage.getItem(username)) {
+                alert("Username already exists. Please choose another.");
+                return;
+            }
+
+            const emailRegex = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email address");
+                return;
+            }
+
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let storedUser = JSON.parse(localStorage.getItem(key));
+                if (storedUser.email === email) {
+                    alert("Email already exists. Please choose another or log in.");
+                    return;
+                }
+            }
+
+            if (!/[a-z]/.test(password)) {
+                document.getElementById("lowercase").style.color='red';
+                valid = false;
+            } else {
+                document.getElementById("lowercase").style.color='green';
+            }
+
+            if (!/[A-Z]/.test(password)) {
+                document.getElementById("uppercase").style.color='red';
+                valid = false;
+            } else {
+                document.getElementById("uppercase").style.color='green';
+            }
+
+            if (!/\d/.test(password)) {
+                document.getElementById("number").style.color='red';
+                valid = false;
+            } else {
+                document.getElementById("number").style.color='green';
+            }
+
+            if (!/[!-\/:-@[-`{-~]/.test(password)) {
+                document.getElementById("special").style.color='red';
+                valid = false;
+            } else {
+                document.getElementById("special").style.color='green';
+            }
+
+            if (password.length < 8) {
+                document.getElementById("eight").style.color='red';
+                valid = false;
+            } else {
+                document.getElementById("eight").style.color='green';
+            }
+
+            if (valid) {
+                const userData = { fname, lname, email, password, role };
+                localStorage.setItem(username, JSON.stringify(userData));
+                alert("Account created successfully!");
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+</body>
+</html>

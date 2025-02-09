@@ -1,0 +1,77 @@
+/* --- Admin Dashboard (admin_dashboard.html) --- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
+        header { background-color: #007bff; color: white; padding: 20px; font-size: 1.5rem; }
+        nav a { margin: 15px; text-decoration: none; color: white; font-weight: bold; }
+        .container { margin-top: 20px; }
+        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>Admin Dashboard</header>
+    <nav><a href="#users">Manage Users</a> | <a href="#stocks">Manage Stocks</a></nav>
+    <div class="container"><h2>Welcome, Admin!</h2></div>
+    <button class="logout" onclick="logout()">Logout</button>
+    <script>
+        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
+    </script>
+</body>
+</html>
+
+/* --- Manager Dashboard (manager_dashboard.html) --- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
+        header { background-color: #28a745; color: white; padding: 20px; font-size: 1.5rem; }
+        nav a { margin: 15px; text-decoration: none; color: white; font-weight: bold; }
+        .container { margin-top: 20px; }
+        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>Manager Dashboard</header>
+    <nav><a href="#portfolios">Manage Portfolios</a> | <a href="#reports">View Reports</a></nav>
+    <div class="container"><h2>Welcome, Manager!</h2></div>
+    <button class="logout" onclick="logout()">Logout</button>
+    <script>
+        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
+    </script>
+</body>
+</html>
+
+/* --- Trader Dashboard (trader_dashboard.html) --- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
+        header { background-color: #ffc107; color: black; padding: 20px; font-size: 1.5rem; }
+        nav a { margin: 15px; text-decoration: none; color: black; font-weight: bold; }
+        .container { margin-top: 20px; }
+        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>Trader Dashboard</header>
+    <nav><a href="#trade">Place Trade</a> | <a href="#history">Transaction History</a></nav>
+    <div class="container"><h2>Welcome, Trader!</h2></div>
+    <button class="logout" onclick="logout()">Logout</button>
+    <script>
+        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
+    </script>
+</body>
+</html>
