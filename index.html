@@ -29,7 +29,7 @@
         }
 
         input {
-            width: 92.7%;
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -44,6 +44,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
@@ -80,33 +81,63 @@
     <script>
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            const username = document.getElementById("username").value;
+            const inputUsername = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value;
-            const userData = localStorage.getItem(username);
-            
-            if (userData) {
-                const { password: storedPassword, role } = JSON.parse(userData);
-                if (password === storedPassword) {
-                    alert("Login successful!");
-                    localStorage.setItem("loggedInUser", username);
-                    
-                    // Redirect based on role
-                    if (role === "admin") {
-                        window.location.href = "admin.html";
-                    } else if (role === "manager") {
-                        window.location.href = "manager.html";
-                    } else if (role === "trader") {
-                        window.location.href = "trader.html";
-                    } else {
-                        window.location.href = "fake.html";
+
+            if (!inputUsername || !password) {
+                alert("Please enter both username and password.");
+                return;
+            }
+
+            // Normalize the username to lowercase
+            const normalizedUsername = inputUsername.toLowerCase();
+            let foundUser = null;
+
+            // Loop through localStorage to find the correct user
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    const storedUser = JSON.parse(localStorage.getItem(key));
+
+                    // Ensure storedUser exists and matches case-insensitively
+                    if (storedUser && storedUser.username.toLowerCase() === normalizedUsername) {
+                        foundUser = storedUser;
+                        break;
                     }
+                } catch (error) {
+                    console.error("Corrupted data in localStorage:", key, localStorage.getItem(key));
+                }
+            }
+
+            if (foundUser) {
+                const { username, password: storedPassword, role, accountNumber } = foundUser;
+
+                if (password === storedPassword) {
+                    alert(`Login successful!\nWelcome, ${username}!\nAccount Number: ${accountNumber}`);
+                    localStorage.setItem("loggedInUser", username);
+
+                    // Redirect based on role
+                    const roleRedirects = {
+                        admin: "admin.html",
+                        manager: "manger.html",
+                        trader: "trader.html",
+                    };
+
+                    window.location.href = roleRedirects[role] || "fake.html";
                 } else {
-                    alert("Invalid password. Try again.");
+                    alert("Incorrect password. Please try again.");
                 }
             } else {
                 alert("User not found. Please sign up.");
             }
         });
+
+        // Debugging: Print all stored users
+        console.log("Stored Users in LocalStorage:");
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            console.log(key, ":", localStorage.getItem(key));
+        }
     </script>
 </body>
 </html>

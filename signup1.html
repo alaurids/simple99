@@ -24,7 +24,7 @@
             text-align: center;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -83,8 +83,14 @@
             <input type="text" id="email" placeholder="Email address" required>
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
+            
+            <label for="role">Select Role:</label>
+            <select id="role" required>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="trader">Trader</option>
+            </select>
 
-            <input type="text" id="role" value="Trader" readonly>
             <input type="text" id="accountNumber" placeholder="Account Number" readonly>
             <button type="submit">Sign Up</button>
         </form>
@@ -120,7 +126,7 @@
             const email = document.getElementById("email").value.trim();
             const username = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value;
-            const role = "trader"; // Fixed role as Trader
+            const role = document.getElementById("role").value;
             const accountNumber = generateAccountNumber();
 
             // Validate email format
@@ -138,14 +144,10 @@
 
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
-                try {
-                    let storedUser = JSON.parse(localStorage.getItem(key));
-                    if (storedUser && storedUser.email === email) {
-                        alert("Email already exists. Please choose another or log in.");
-                        return;
-                    }
-                } catch (error) {
-                    console.warn("Skipping corrupted localStorage data:", key);
+                let storedUser = JSON.parse(localStorage.getItem(key));
+                if (storedUser.email === email) {
+                    alert("Email already exists. Please choose another or log in.");
+                    return;
                 }
             }
 

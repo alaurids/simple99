@@ -1,77 +1,103 @@
-/* --- Admin Dashboard (admin_dashboard.html) --- */
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
-        header { background-color: #007bff; color: white; padding: 20px; font-size: 1.5rem; }
-        nav a { margin: 15px; text-decoration: none; color: white; font-weight: bold; }
-        .container { margin-top: 20px; }
-        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>Admin Dashboard</header>
-    <nav><a href="#users">Manage Users</a> | <a href="#stocks">Manage Stocks</a></nav>
-    <div class="container"><h2>Welcome, Admin!</h2></div>
-    <button class="logout" onclick="logout()">Logout</button>
-    <script>
-        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
-    </script>
-</body>
-</html>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-900 text-white h-screen p-5">
+            <h1 class="text-2xl font-bold mb-5">Admin Panel</h1>
+            <nav>
+                <a href="#dashboard" class="block py-2 px-4 hover:bg-gray-700">Dashboard</a>
+                <a href="#users" class="block py-2 px-4 hover:bg-gray-700">Manage Users</a>
+                <a href="#stocks" class="block py-2 px-4 hover:bg-gray-700">Manage Stocks</a>
+                <a href="#reports" class="block py-2 px-4 hover:bg-gray-700">Reports</a>
+            </nav>
+        </aside>
 
-/* --- Manager Dashboard (manager_dashboard.html) --- */
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Dashboard</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
-        header { background-color: #28a745; color: white; padding: 20px; font-size: 1.5rem; }
-        nav a { margin: 15px; text-decoration: none; color: white; font-weight: bold; }
-        .container { margin-top: 20px; }
-        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <header>Manager Dashboard</header>
-    <nav><a href="#portfolios">Manage Portfolios</a> | <a href="#reports">View Reports</a></nav>
-    <div class="container"><h2>Welcome, Manager!</h2></div>
-    <button class="logout" onclick="logout()">Logout</button>
-    <script>
-        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
-    </script>
-</body>
-</html>
+        <!-- Main Content -->
+        <main class="flex-1 p-10">
+            <!-- Header with Account Info -->
+            <header class="bg-blue-500 text-white p-5 rounded-lg text-center text-2xl">
+                Admin Dashboard
+                <p class="text-sm mt-2">
+                    <strong>Username:</strong> <span id="username"></span> |
+                    <strong>Account Number:</strong> <span id="accountNumber"></span>
+                </p>
+            </header>
 
-/* --- Trader Dashboard (trader_dashboard.html) --- */
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader Dashboard</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f5f7fa; text-align: center; }
-        header { background-color: #ffc107; color: black; padding: 20px; font-size: 1.5rem; }
-        nav a { margin: 15px; text-decoration: none; color: black; font-weight: bold; }
-        .container { margin-top: 20px; }
-        .logout { margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <header>Trader Dashboard</header>
-    <nav><a href="#trade">Place Trade</a> | <a href="#history">Transaction History</a></nav>
-    <div class="container"><h2>Welcome, Trader!</h2></div>
-    <button class="logout" onclick="logout()">Logout</button>
+            <!-- Dashboard Actions -->
+            <div class="grid grid-cols-3 gap-4 mt-5">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Create User</h3>
+                    <button onclick="fakeAction('Create User')" class="mt-3 bg-blue-500 text-white py-2 px-4 rounded">Create</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Delete User</h3>
+                    <button onclick="fakeAction('Delete User')" class="mt-3 bg-red-500 text-white py-2 px-4 rounded">Delete</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Update Stock Prices</h3>
+                    <button onclick="fakeAction('Update Stock Prices')" class="mt-3 bg-green-500 text-white py-2 px-4 rounded">Update</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Generate Report</h3>
+                    <button onclick="fakeAction('Generate Report')" class="mt-3 bg-yellow-500 text-white py-2 px-4 rounded">Generate</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">View Audit Logs</h3>
+                    <button onclick="fakeAction('View Audit Logs')" class="mt-3 bg-indigo-500 text-white py-2 px-4 rounded">View</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Backup Data</h3>
+                    <button onclick="fakeAction('Backup Data')" class="mt-3 bg-gray-500 text-white py-2 px-4 rounded">Backup</button>
+                </div>
+            </div>
+
+            <!-- Logout Button -->
+            <button class="mt-10 bg-red-500 text-white py-2 px-4 rounded" onclick="logout()">Logout</button>
+        </main>
+    </div>
+
     <script>
-        function logout() { localStorage.removeItem("loggedInUser"); window.location.href = "login.html"; }
+        // Retrieve logged-in user
+        const loggedInUser = localStorage.getItem("loggedInUser");
+    
+        if (loggedInUser) {
+            const userDataString = localStorage.getItem(loggedInUser);
+            console.log("User Data Retrieved:", userDataString); // Debugging log
+    
+            if (userDataString) {
+                const userData = JSON.parse(userDataString);
+    
+                if (userData.username && userData.accountNumber) {
+                    document.getElementById("username").innerText = userData.username;
+                    document.getElementById("accountNumber").innerText = userData.accountNumber;
+                } else {
+                    alert("User data missing. Please log in again.");
+                    localStorage.removeItem("loggedInUser");
+                    window.location.href = "login.html";
+                }
+            } else {
+                alert("User data not found. Please log in again.");
+                localStorage.removeItem("loggedInUser");
+                window.location.href = "index.html";
+            }
+        } else {
+            alert("You are not logged in.");
+            window.location.href = "index.html";
+        }
+    
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "index.html";
+        }
     </script>
+    
+
 </body>
 </html>
