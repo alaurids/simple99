@@ -91,7 +91,6 @@
                 <option value="trader">Trader</option>
             </select>
 
-            <input type="text" id="accountNumber" placeholder="Account Number" readonly>
             <button type="submit">Sign Up</button>
         </form>
 
@@ -127,16 +126,13 @@
             const username = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value;
             const role = document.getElementById("role").value;
-            const accountNumber = generateAccountNumber();
-
-            // Validate email format
+        
             const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
             if (!emailRegex.test(email)) {
                 alert("Invalid email address");
                 return;
             }
 
-            // Check if username or email exists
             if (localStorage.getItem(username)) {
                 alert("Username already exists. Please choose another.");
                 return;
@@ -151,26 +147,18 @@
                 }
             }
 
-            // Validate password
             if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password) || !/[!-\/:-@[-`{-~]/.test(password) || password.length < 8) {
                 alert("Password does not meet requirements.");
                 return;
             }
 
-            document.getElementById("accountNumber").value = accountNumber;
-
-            // Store user data
-            const userData = { username, fname, lname, email, password, role, accountNumber };
+            const userData = { username, fname, lname, email, password, role };
             localStorage.setItem(username, JSON.stringify(userData));
-            localStorage.setItem("loggedInUser", username); // Ensure user is logged in immediately
+            localStorage.setItem("loggedInUser", username);
 
-            alert("Account created successfully!\nAccount Number: " + accountNumber);
+            alert("Account created successfully!");
             window.location.href = "index.html";
         });
-
-        function generateAccountNumber() {
-            return Math.floor(1000000000 + Math.random() * 9000000000).toString();
-        }
     </script>
 </body>
 </html>

@@ -110,10 +110,10 @@
             }
 
             if (foundUser) {
-                const { username, password: storedPassword, role, accountNumber } = foundUser;
+                const { username, password: storedPassword, role } = foundUser;
 
                 if (password === storedPassword) {
-                    alert(`Login successful!\nWelcome, ${username}!\nAccount Number: ${accountNumber}`);
+                    alert(`Login successful!\nWelcome, ${username}!`);
                     localStorage.setItem("loggedInUser", username);
 
                     // Redirect based on role
@@ -123,7 +123,7 @@
                         trader: "trader.html",
                     };
 
-                    window.location.href = roleRedirects[role] || "fake.html";
+                    window.location.href = roleRedirects[role] || "signup.html";
                 } else {
                     alert("Incorrect password. Please try again.");
                 }

@@ -24,8 +24,7 @@
             <header class="bg-green-500 text-white p-5 rounded-lg text-center text-2xl">
                 Manager Dashboard
                 <p class="text-sm mt-2">
-                    <strong>Username:</strong> <span id="username"></span> |
-                    <strong>Account Number:</strong> <span id="accountNumber"></span>
+                    <strong>Username:</strong> <span id="username"></span>
                 </p>
             </header>
 
@@ -72,9 +71,8 @@
             if (userDataString) {
                 const userData = JSON.parse(userDataString);
 
-                if (userData.username && userData.accountNumber) {
+                if (userData.username) {
                     document.getElementById("username").innerText = userData.username;
-                    document.getElementById("accountNumber").innerText = userData.accountNumber;
                 } else {
                     alert("User data missing. Please log in again.");
                     localStorage.removeItem("loggedInUser");
