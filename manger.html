@@ -40,7 +40,7 @@
                 </div>
                 <div class="bg-white p-5 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Generate Performance Reports</h3>
-                    <button onclick="fakeAction('Generate Performance Reports')" class="mt-3 bg-yellow-500 text-white py-2 px-4 rounded">Generate</button>
+                    <button onclick="generateReport()" class="mt-3 bg-yellow-500 text-white py-2 px-4 rounded">Generate</button>
                 </div>
                 <div class="bg-white p-5 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Analyze Market Trends</h3>
@@ -48,7 +48,11 @@
                 </div>
                 <div class="bg-white p-5 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Manage Client Portfolios</h3>
-                    <button onclick="fakeAction('Manage Client Portfolios')" class="mt-3 bg-gray-500 text-white py-2 px-4 rounded">Manage</button>
+                    <button onclick="managePortfolio()" class="mt-3 bg-gray-500 text-white py-2 px-4 rounded">Manage</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Create Report</h3>
+                    <button onclick="createReport()" class="mt-3 bg-orange-500 text-white py-2 px-4 rounded">Create</button>
                 </div>
             </div>
 
@@ -93,6 +97,21 @@
 
         function fakeAction(action) {
             alert(`${action} action performed!`);
+        }
+
+        function createReport() {
+            alert("Creating a new report...");
+            // Placeholder for future implementation of report creation logic
+        }
+
+        function managePortfolio() {
+            alert("Managing client portfolios...");
+            // Placeholder for future implementation of portfolio management
+        }
+
+        function generateReport() {
+            alert("Generating performance report...");
+            // Placeholder for report generation logic
         }
     </script>
 </body>
